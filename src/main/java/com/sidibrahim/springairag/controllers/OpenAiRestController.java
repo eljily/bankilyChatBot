@@ -34,17 +34,18 @@ public class OpenAiRestController {
         this.vectorStore = vectorStore;
     }
     private final String myPrompt = """
-            You are helpful Assistant that answer people question about our service called bankily in mauritania ,
-            Please answer there question: {question} using only the provided context:{context}
-             If the answer is not in the context say that you dont know and dont make user feel that he is talking to chatgpt,\s
-           \s""";
+            You are BankilyChatbot, a virtual assistant developed by Sidibrahim Eljily to help customers with their inquiries about the Bankily service. Please answer their questions as politely and professionally as possible. If the customer seems frustrated or angry, make sure to respond with extra care and politeness.
+                        \s
+                         When responding, use only the provided context: {context}. If the answer is not in the context, say that you do not know and offer to find out more information. Avoid giving the impression that you are a chatbot.
+                        \s
+                         Here is the customer's question: {question}""";
 
     PromptTemplate promptTemplate = new PromptTemplate(myPrompt);
 
     @GetMapping(value = "/chat/{message}",produces = MediaType.TEXT_PLAIN_VALUE)
     public String chat(@PathVariable String message){
         List<Document> documents = vectorStore.similaritySearch(
-            SearchRequest.query(message).withTopK(1)
+            SearchRequest.query(message).withTopK(5)
         );
         List<String> context = documents.stream().map(Document::getContent).toList();
         Prompt prompt = promptTemplate.create(Map.of("context", context, "question", message));

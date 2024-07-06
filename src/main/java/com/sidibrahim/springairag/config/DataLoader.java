@@ -24,12 +24,11 @@ import java.util.List;
 public class DataLoader {
 
     private static final Logger log = LoggerFactory.getLogger(DataLoader.class);
-    @Value("classpath:/pdfs/ragPdf.pdf")
+    @Value("classpath:/pdfs/bankily.pdf")
     private Resource pdfFile;
-    @Value("my-vs.json")
+    @Value("my-vs2.json")
     private String vectorStoreName;
     @Bean
-    @Lazy
     public SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel) {
         SimpleVectorStore simpleVectorStore = new SimpleVectorStore(embeddingModel);
         String path = Path.of("src", "main", "resources","vectorstore").toFile().getAbsolutePath() + "/" + vectorStoreName;
@@ -38,6 +37,7 @@ public class DataLoader {
             log.info("VECTOR STORE EXISTS => " + file.getAbsolutePath());
             simpleVectorStore.load(file);
         } else {
+            log.info("VECTOR STORE DOES NOT EXISTS => " + file.getAbsolutePath());
             PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
             List<Document> documents = documentReader.get();
             TextSplitter textSplitter = new TokenTextSplitter();
