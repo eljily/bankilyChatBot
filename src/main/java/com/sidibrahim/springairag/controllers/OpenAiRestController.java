@@ -29,7 +29,7 @@ public class OpenAiRestController {
     private final ChatClient chatClient;
     private final VectorStore vectorStore;
 
-    public OpenAiRestController(ChatClient.Builder chatClient,VectorStore vectorStore) {
+    public OpenAiRestController(ChatClient.Builder chatClient,@Lazy VectorStore vectorStore) {
         this.chatClient = chatClient.build();
         this.vectorStore = vectorStore;
     }
