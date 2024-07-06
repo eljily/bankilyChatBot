@@ -10,6 +10,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,13 @@ import java.util.Map;
 
 @RestController
 @Slf4j
+@Lazy
 public class OpenAiRestController {
     private static final Logger log = LoggerFactory.getLogger(OpenAiRestController.class);
     private final ChatClient chatClient;
     private final VectorStore vectorStore;
 
-    public OpenAiRestController(ChatClient.Builder chatClient, VectorStore vectorStore) {
+    public OpenAiRestController(ChatClient.Builder chatClient,VectorStore vectorStore) {
         this.chatClient = chatClient.build();
         this.vectorStore = vectorStore;
     }
