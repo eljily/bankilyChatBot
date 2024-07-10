@@ -34,10 +34,10 @@ public class DataLoader {
         String path = Path.of("src", "main", "resources","vectorstore").toFile().getAbsolutePath() + "/" + vectorStoreName;
         File file = new File(path);
         if (file.exists()) {
-            log.info("VECTOR STORE EXISTS => " + file.getAbsolutePath());
+            log.info("VECTOR STORE EXISTS => {}", file.getAbsolutePath());
             simpleVectorStore.load(file);
         } else {
-            log.info("VECTOR STORE DOES NOT EXISTS => " + file.getAbsolutePath());
+            log.info("VECTOR STORE DOES NOT EXISTS => {}", file.getAbsolutePath());
             PagePdfDocumentReader documentReader = new PagePdfDocumentReader(pdfFile);
             List<Document> documents = documentReader.get();
             TextSplitter textSplitter = new TokenTextSplitter();

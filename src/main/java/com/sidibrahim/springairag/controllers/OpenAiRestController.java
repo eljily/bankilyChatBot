@@ -23,13 +23,12 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-@Lazy
 public class OpenAiRestController {
     private static final Logger log = LoggerFactory.getLogger(OpenAiRestController.class);
     private final ChatClient chatClient;
     private final VectorStore vectorStore;
 
-    public OpenAiRestController(ChatClient.Builder chatClient,@Lazy VectorStore vectorStore) {
+    public OpenAiRestController(ChatClient.Builder chatClient,VectorStore vectorStore) {
         this.chatClient = chatClient.build();
         this.vectorStore = vectorStore;
     }
