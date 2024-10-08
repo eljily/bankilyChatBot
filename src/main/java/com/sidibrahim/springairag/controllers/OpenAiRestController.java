@@ -26,10 +26,9 @@ import java.util.Map;
 public class OpenAiRestController {
     private static final Logger log = LoggerFactory.getLogger(OpenAiRestController.class);
     private final ChatClient chatClient;
-    //private final VectorStore vectorStore;
-    private final SimpelVectoreStore vectoreStore;
+    private final VectorStore vectorStore;
 
-    public OpenAiRestController(ChatClient.Builder chatClient,SimpelVectorStore vectorStore) {
+    public OpenAiRestController(ChatClient.Builder chatClient,VectorStore vectorStore) {
         this.chatClient = chatClient.build();
         this.vectorStore = vectorStore;
     }
