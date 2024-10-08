@@ -40,7 +40,7 @@ public class DataLoader {
         this.vectorStore = vectorStore;
     }
 
-    @Bean
+    //@Bean
     public SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel) {
         SimpleVectorStore simpleVectorStore = new SimpleVectorStore(embeddingModel);
         String path = Path.of("src", "main", "resources","vectorstore").toFile().getAbsolutePath() + "/" + vectorStoreName;
@@ -60,7 +60,7 @@ public class DataLoader {
         return simpleVectorStore;
     }
 
-    //@PostConstruct
+    @PostConstruct
     public void initData(){
         Integer count = jdbcClient.sql("select count(*) from vector_store")
                 .query(Integer.class)
